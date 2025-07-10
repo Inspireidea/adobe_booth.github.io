@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adobe</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f8f1f1;
+    }
+    .header {
+      text-align: center;
+      margin: 30px 0;
+      display: none;
+    }
+    .logo {
+      max-width: 180px;
+      height: auto;
+      margin: 20px 0;
+    }
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: none;
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    #welcomePage {
+      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Tension_Fabric_Spider_Banner_page-001.jpg');
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    #thankYouPage {
+      background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('Tension_Fabric_Spider_Banner_page-001.jpg');
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .welcome-content {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    .thank-you-content {
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input::placeholder {
+      color: #999;
+      font-style: italic;
+    }
+    fieldset {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 10px;
+    }
+    .topic-option {
+      font-size: 0.9em;
+      font-weight: normal;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    #startFormBtn {
+      background-color: #ed1c24;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      min-width: 250px;
+    }
+    button {
+      background-color: #ed1c24;
+      color: white;
+      border: none;
+      padding: 15px 0;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    button:hover {
+      background-color: #c2161b;
+    }
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .privacy {
+      font-size: 12px;
+      margin-top: 20px;
+      color: #666;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .privacy a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    .privacy a:hover {
+      text-decoration: underline;
+    }
+    .error {
+      color: #d32f2f;
+      margin-top: 10px;
+      text-align: center;
+    }
+    .required-note {
+      color: red;
+      font-size: 14px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .required-note:before {
+      content: "* ";
+    }
+    .required:after {
+      content: " *";
+      color: red;
+    }
+    .checkbox-required {
+      color: red;
+      font-size: 0.9em;
+      margin-left: 5px;
+    }
+    .welcome-title {
+      color: #ed1c24;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+    .thank-you-message {
+      color: #ed1c24;
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="Adobe_Logo_Red.png" alt="Adobe Logo" class="logo"> <!-- Updated logo filename -->
+  </div>
+
+  <!-- Welcome Page -->
+  <div id="welcomePage">
+    <div class="welcome-content">
+      <h1 class="welcome-title">Welcome to Adobe Booth</h1>
+      <p>We're excited to have you here! Please take a moment to fill out our interest form.</p>
+      <button id="startFormBtn">PLEASE FILL OUT THE FORM</button>
+    </div>
+  </div>
+
+  <!-- Form Page (hidden by default) -->
+  <form id="adobeForm">
+    <div class="header">
+      <img src="Adobe_Logo_Red.png" alt="Adobe Logo" class="logo"> <!-- Updated logo filename -->
+    </div>
+    
+    <p class="required-note">Required</p>
+    
+    <label for="firstName" class="required">First Name:</label>
+    <input type="text" id="firstName" name="firstName" placeholder="Please enter your first name" required>
+    
+    <label for="lastName" class="required">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" placeholder="Please enter your last name" required>
+    
+    <label for="email" class="required">Business Email:</label>
+    <input type="email" id="email" name="email" placeholder="example@company.com" required>
+    
+    <label for="phone" class="required">Mobile Phone:</label>
+    <input type="tel" id="phone" name="phone" placeholder="099-999-9999" required>
+    
+    <label for="company" class="required">Company Name:</label>
+    <input type="text" id="company" name="company" placeholder="Please enter your company name" required>
+    
+    <label for="jobTitle" class="required">Job Title:</label>
+    <input type="text" id="jobTitle" name="jobTitle" placeholder="Please enter your job title" required>
+    
+    <fieldset>
+      <legend class="required">Would you be interested in any of the following topics? <span class="checkbox-required">(Select at least 1)</span></legend>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Customer Journey Orchestration">
+        Customer Journey Orchestration – Delivering personalized experiences across multiple channels
+      </label>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Content Supply Chain & Automation">
+        Content Supply Chain & Automation – Scaling content creation and delivery efficiently
+      </label>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Data-Driven Marketing">
+        Data-Driven Marketing – Leveraging AI and data insights to enhance customer engagement
+      </label>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Commerce & Personalization">
+        Commerce & Personalization – Driving revenue growth with AI-powered recommendations
+      </label>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Customer Data Platform (CDP)">
+        Customer Data Platform (CDP) – Unifying customer data for better targeting and segmentation
+      </label>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Generative AI in Digital Experience">
+        Generative AI in Digital Experience – Exploring use cases and best practices
+      </label>
+      
+      <label class="topic-option">
+        <input type="checkbox" name="topics" value="Not at the moment">
+        Not at the moment
+      </label>
+    </fieldset>
+    
+    <div class="privacy">
+      <p>
+        By supplying my contact information, I authorize the <a href="https://www.adobe.com/privacy/policy.html#info-share" target="_blank">Adobe family of companies</a> to contact me with <a href="https://www.adobe.com/privacy/marketing.html#mktg-email" target="_blank">personalized</a> communications about Adobe's products and services.  
+        See our <a href="https://www.adobe.com/privacy/policy.html" target="_blank">Privacy Policy</a> for more details or to <a href="https://account.adobe.com/privacy" target="_blank">opt-out</a> at any time.
+      </p>
+    </div>
+    
+    <button type="submit" id="submitBtn">Submit</button>
+    <div id="errorMsg" class="error"></div>
+  </form>
+
+  <!-- Thank You Page (hidden by default) -->
+  <div id="thankYouPage">
+    <div class="thank-you-content">
+      <div class="thank-you-message">Thank you for visiting the Adobe booth.</div>
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx5Io0FxAJdwif6ZLFMJhGu4uBq3K_sncYQwoA0aBWxiR_dzNah0VRICRVMEDXYr1Fzag/exec';
+    const form = document.getElementById('adobeForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const welcomePage = document.getElementById('welcomePage');
+    const thankYouPage = document.getElementById('thankYouPage');
+    const startFormBtn = document.getElementById('startFormBtn');
+    const header = document.querySelector('.header');
+
+    // Show welcome page by default
+    welcomePage.style.display = 'flex';
+    form.style.display = 'none';
+    thankYouPage.style.display = 'none';
+    header.style.display = 'none';
+
+    // Start form button click handler
+    startFormBtn.addEventListener('click', () => {
+      welcomePage.style.display = 'none';
+      form.style.display = 'block';
+      header.style.display = 'block';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      // Validate at least one checkbox is checked
+      const checkboxes = Array.from(form.querySelectorAll('input[name="topics"]'));
+      const isAtLeastOneChecked = checkboxes.some(checkbox => checkbox.checked);
+      
+      if (!isAtLeastOneChecked) {
+        errorMsg.textContent = 'Please select at least one topic of interest.';
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+        return;
+      }
+
+      try {
+        const formData = new FormData(form);
+        const data = {
+          firstName: formData.get('firstName'),
+          lastName: formData.get('lastName'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          company: formData.get('company'),
+          jobTitle: formData.get('jobTitle'),
+          topics: formData.getAll('topics')
+        };
+
+        const response = await fetch(scriptURL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+
+        // Show thank you page after successful submission
+        form.style.display = 'none';
+        header.style.display = 'none';
+        thankYouPage.style.display = 'flex';
+
+      } catch (error) {
+        console.error('Error:', error);
+        errorMsg.textContent = 'Error: Please try again or contact support.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Submit";
+      }
+    });
+  </script>
+</body>
+</html>
